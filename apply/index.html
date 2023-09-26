@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function greet(greeting) {
+        console.log(greeting + ', ' + this.name);
+    }
+
+    const person = {
+        name: 'John'
+    };
+    //     apply 方法的语法如下：
+
+    // javascript
+    // function.apply(thisArg, [argsArray])
+    // function 是要调用的函数。
+    // thisArg 是要在函数内部用作 this 的值。它可以是任何对象，通常用来指定函数在哪个对象上执行。
+    // argsArray 是一个包含参数的数组。这些参数将被传递给函数。
+
+    // 使用 apply 调用 greet 函数，并将 person 对象作为上下文，并传递参数数组
+    greet.apply(person, ['Hello']);
+   // Hello, John
+
+</script>
+
+</html>

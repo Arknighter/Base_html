@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
+</head>
+
+<body>
+    <form>
+        <input id="$inputTypeFile" type="file" name="audio" accept="audio/*">
+    </form>
+    <img src="" alt="" width="500px" height="500px">
+</body>
+<script>
+    // From File
+    $inputTypeFile.addEventListener("change", function (event) {
+        var file = event.target.files[0];
+        jsmediatags.read(file, {
+            onSuccess: function (tag) {
+                console.log(tag);
+
+                //MP3歌词
+                // console.log(tag.tags.lyrics.lyrics);
+                // // //m4a歌词
+                // console.log(tag.tags.lyrics);
+                // //flac  
+
+
+                var picture = tag.tags.picture; // create reference to track art 
+                var base64String = "";
+                console.log(picture.data);
+                for (var i = 0; i < picture.data.length; i++) {
+                    base64String += String.fromCharCode(picture.data[i]);
+                }
+                var imageUri = "data:" + picture.format + ";base64," + window.btoa(base64String);
+                document.querySelector('img').src = imageUri;
+                console.log(tag.tags.lyrics);
+                // use ajax to upload tag info, or create some new form elements
+            },
+            onError: function (error) {
+                console.log(error);
+            }
+        });
+    }, false);
+</script>
+
+</html>
